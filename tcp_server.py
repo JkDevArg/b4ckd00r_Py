@@ -72,7 +72,8 @@ class Listener:
         print('[>] reiniciar | Hace que el equipo de destino se reinicie') 
         print('[>] descargar | Descarga el archivo cualquier archivo') 
         print('[>] subir | Carga cualquier archivo') 
-        print('[>] captura de pantalla\n')
+        print('[>] captura de pantalla\n')'
+        print('texto nuevo')
 
 
     def run(self):
